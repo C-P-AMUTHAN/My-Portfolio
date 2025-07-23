@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education | Amuthan C P</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 2rem;
+      color: #2c3e50;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .education-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 40px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .edu-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .edu-card:hover {
+      transform: translateY(-5px) rotate(2deg);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #fff, #f9f9f9);
+    }
+
+    .edu-card h3 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: #0077cc;
+      transition: color 0.3s ease;
+    }
+
+    .edu-card:hover h3 {
+      color: #005fa3;
+    }
+
+    .edu-card p {
+      margin: 8px 0;
+      transition: color 0.3s ease;
+    }
+
+    .edu-card:hover p {
+      color: #555;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Internships</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <h2>My Education</h2>
+
+  <div class="education-container">
+    <div class="edu-card">
+      <h3>B.E. Computer Science and Engineering</h3>
+      <p>K. Ramakrishnan College of Engineering (Final Year)</p>
+      <p><strong>CGPA:</strong> 8.43</p>
+    </div>
+
+    <div class="edu-card">
+      <h3>HSC (12th)</h3>
+      <p>Sri Bala Vidya Mandir Higher Secondary School</p>
+      <p><strong>Percentage:</strong> 93.1%</p>
+    </div>
+
+    <div class="edu-card">
+      <h3>SSLC (10th)</h3>
+      <p>Dalmia Vidya Mandir</p>
+      <p><strong>Percentage:</strong> 68%</p>
+    </div>
+  </div>
+
+  <script>
+    // Page transition script
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

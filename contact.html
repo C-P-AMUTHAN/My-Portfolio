@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Amuthan C P</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    h2 {
+      text-align: center;
+      margin: 40px 0 30px;
+      font-size: 2.5rem;
+      color: #2c3e50;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .contact-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      margin-bottom: 40px;
+    }
+
+    .contact-box:hover {
+      transform: translateY(-5px) rotate(1deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #fff, #f9f9f9);
+    }
+
+    .contact-box p {
+      margin: 10px 0;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-box p:hover {
+      transform: translateX(10px);
+      color: #0077cc;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    a {
+      color: #0077b5;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    a:hover {
+      color: #005f8b;
+      transform: translateX(5px);
+      text-decoration: underline;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-form:hover {
+      transform: translateY(-5px) rotate(1deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #fff, #f9f9f9);
+    }
+
+    .contact-form h3 {
+      color: #0077cc;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #0077cc;
+      box-shadow: 0 0 8px rgba(0, 119, 204, 0.2);
+      outline: none;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #005fa3;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-box, .contact-form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Internships</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <h2>Contact Information</h2>
+
+  <div class="contact-container">
+    <div class="contact-box">
+      <p><span class="label">Mobile:</span> +91 63745 31264</p>
+      <p><span class="label">Email:</span> <a href="mailto:amuthanpuviarasu7@gmail.com">amuthanpuviarasu7@gmail.com</a></p>
+      <p><span class="label">LinkedIn:</span> <a href="https://www.linkedin.com/in/amuthan-c-p-3870ab252/" target="_blank">amuthan-c-p-3870ab252</a></p>
+      <p><span class="label">GitHub:</span> <a href="https://github.com/C-P-AMUTHAN" target="_blank">C-P-AMUTHAN</a></p>
+      <p><span class="label">Location:</span> Tiruchirappalli, Tamil Nadu, India</p>
+    </div>
+
+    <!-- <div class="contact-form">
+      <h3>Send Me a Message</h3>
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" placeholder="Enter your message" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Message</button>
+    </div> -->
+  </div>
+
+  <script>
+    // Page transition script
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

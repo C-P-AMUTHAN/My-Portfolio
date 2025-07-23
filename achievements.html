@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achievements | Amuthan C P</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    h2 {
+      text-align: center;
+      margin: 40px 0 30px;
+      font-size: 2.5rem;
+      color: #2c3e50;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .achievements-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      animation: slideIn 1s ease-out;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+    }
+
+    .section:hover {
+      transform: translateY(-5px) rotate(1deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #fff, #f9f9f9);
+    }
+
+    .section h3 {
+      margin-top: 0;
+      color: #0077cc;
+      transition: color 0.3s ease;
+      text-align: center;
+    }
+
+    .section:hover h3 {
+      color: #005fa3;
+    }
+
+    .achievement-box {
+      background: #f9f9f9;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .achievement-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .achievement-box p {
+      font-size: 16px;
+      margin: 0 0 10px;
+      color: #444;
+    }
+
+    .view-more {
+      display: flex;
+      justify-content: flex-end;
+      font-weight: bold;
+      color: #0077cc;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .view-more:hover {
+      color: #005fa3;
+      transform: translateX(5px);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .achievements-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Internships</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <h2>Achievements & Certifications</h2>
+
+  <div class="achievements-container">
+    <div class="section">
+      <h3>Technical Achievements</h3>
+      <br>
+      <div class="achievement-box" onclick="openModal(0)">
+        <p>Presented paper on "Enhanced E-Ticketing Booking System for Railways" at national-level technical conference</p>
+        <div class="view-more">View More →</div>
+      </div>
+      <div class="achievement-box" onclick="openModal(1)">
+        <p>Finalist at VIVID 8.0 project competition, SSN College of Engineering</p>
+        <div class="view-more">View More →</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Non-Technical Achievements</h3>
+      <br>
+      <div class="achievement-box" onclick="openModal(2)">
+        <p>Scout Rajya Puraskar Award - Recognized by former Governor Banwarilal Purohit</p>
+        <div class="view-more">View More →</div>
+      </div>
+      <div class="achievement-box" onclick="openModal(3)">
+        <p>Martial Arts Achievement: Purple I Belt in Karate demonstrating discipline and focus</p>
+        <div class="view-more">View More →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="achievementModal">
+    <div class="modal-content" id="modalContent">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <!-- JS Populated Content -->
+    </div>
+  </div>
+
+  <script>
+    const achievements = [
+      {
+        title: "Presented Paper on Enhanced E-Ticketing Booking System",
+        description: `Presented a research paper titled "Enhanced E-Ticketing Booking System for Railways" at a national-level technical conference. The paper proposed an optimized railway ticketing system with improved user experience and backend efficiency, incorporating real-time tracking and automated testing using Selenium.<br><br>
+        - 🏆 Recognized for innovative approach to e-ticketing<br>
+        - 📅 Presented in 2024<br>
+        - 📍 National-level technical conference`
+      },
+      {
+        title: "Finalist at VIVID 8.0 Project Competition",
+        description: `Reached the finals of the VIVID 8.0 project competition held at SSN College of Engineering. The project showcased was a full-stack web application demonstrating advanced UI/UX design and robust backend functionality.<br><br>
+        - 🏆 Top 10 finalist among 100+ teams<br>
+        - 📅 2024<br>
+        - 📍 SSN College of Engineering`
+      },
+      {
+        title: "Scout Rajya Puraskar Award",
+        description: `Received the prestigious Scout Rajya Puraskar Award, recognized by former Governor Banwarilal Purohit. This award was given for outstanding leadership, community service, and dedication in the Scouts program.<br><br>
+        - 🏆 Awarded for exemplary service<br>
+        - 📅 2020<br>
+        - 📍 Recognized at state-level ceremony`
+      },
+      {
+        title: "Martial Arts: Purple I Belt in Karate",
+        description: `Achieved the Purple I Belt in Karate, demonstrating discipline, focus, and physical prowess. The certification required rigorous training and mastery of advanced techniques.<br><br>
+        - 🏆 Certified in 2018<br>
+        - 📍 Local Karate Dojo<br>
+        - 💪 Showcased commitment to personal growth`
+      }
+    ];
+
+    function openModal(index) {
+      const achievement = achievements[index];
+      const modal = document.getElementById('achievementModal');
+      const content = document.getElementById('modalContent');
+      content.innerHTML = `<span class="close-btn" onclick="closeModal()">×</span>
+        <h3>${achievement.title}</h3>
+        <p>${achievement.description}</p>`;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('achievementModal');
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        modal.style.display = 'none';
+        modal.style.opacity = '1';
+      }, 500);
+    }
+
+    // Page transition script
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

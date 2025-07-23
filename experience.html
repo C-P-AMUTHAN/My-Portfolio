@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internships | Amuthan C P</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: #2c3e50;
+    }
+
+    .experience-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .internship {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .internship:hover {
+      transform: translateY(-5px) rotate(1deg);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, #fff, #f9f9f9);
+    }
+
+    .internship h3 {
+      color: #0077cc;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .internship:hover h3 {
+      color: #005fa3;
+    }
+
+    .internship p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .internship a {
+      color: #0077b5;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .internship a:hover {
+      color: #005f8b;
+      transform: translateX(5px);
+      text-decoration: underline;
+    }
+
+    /* Modal styles for images */
+    .photo-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .photo-modal-content {
+      background: white;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      animation: zoomIn 0.5s ease-out;
+      text-align: center;
+    }
+
+    .photo-modal-content img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Internships</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <header>
+    <h1>Internships & Experience</h1>
+  </header>
+
+  <div class="experience-section">
+    <div class="internship">
+      <h3>Pacific Creations (Oct 2023 - Dec 2023)</h3>
+      <p>I have learned HTML and CSS from this internship and created multiple single-page responsive UI components. These snippets were published on the <a href="https://www.learningrobo.com/">Learning Robo</a> platform to assist others in understanding layout systems such as Flexbox and Grid.</p>
+      <p>
+        <strong>Snippets:</strong> <a href="https://www.learningrobo.com/">Learning Robo</a><br>
+        <strong>GitHub:</strong> <a href="https://github.com/C-P-AMUTHAN/HTML-CSS-Snippets">GitHub Repo Link</a><br>
+        <strong>Photos:</strong> <a href="#" onclick="openPhotoModal(0)">Internship Photos</a>
+      </p>
+    </div>
+
+    <div class="internship">
+      <h3>Tech Vaseegrah (May 2024 - May 2025)</h3>
+      <p>Contributed to developing the frontend of an AI-powered chatbot using HTML, CSS, and JS for an e-commerce website. Also worked on the <strong>GoWhats Web Application</strong> aimed at increasing profits by allowing customers to place orders via WhatsApp.</p>
+      <p>This project involved integration with WhatsApp Business API in collaboration with Meta, building a 24/7 customer support chatbot, and creating a seamless ordering flow entirely through WhatsApp.</p>
+      <p>
+        <strong>GitHub:</strong> <a href="https://github.com/C-P-AMUTHAN/whatsapp">GitHub Repo Link</a><br>
+        <strong>Photos:</strong> <a href="#" onclick="openPhotoModal(1)">Internship Photos</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="photo-modal" id="photoModal">
+    <div class="photo-modal-content" id="photoModalContent">
+      <span class="close-btn" onclick="closePhotoModal()">×</span>
+      <!-- JS Populated Images -->
+    </div>
+  </div>
+
+  <script>
+    const internshipPhotos = [
+      {
+        title: "Pacific Creations Internship Photos",
+        images: [
+          "assets/pc intern certificate.jpg"
+        ]
+      },
+      {
+        title: "Tech Vaseegrah Internship Photos",
+        images: [
+          "assets/GoWhats1.jpg",
+          "assets/GoWhats2.jpeg",
+          "assets/tech vaseegrah intern.jpg",
+          "assets/intern.jpg"
+        ]
+      }
+    ];
+
+    function openPhotoModal(index) {
+      const internship = internshipPhotos[index];
+      const modal = document.getElementById('photoModal');
+      const content = document.getElementById('photoModalContent');
+      content.innerHTML = `<span class="close-btn" onclick="closePhotoModal()">×</span>
+        <h3>${internship.title}</h3>
+        ${internship.images.map(img => `<img src="${img}" alt="Internship Photo" />`).join('')}`;
+      modal.style.display = 'flex';
+    }
+
+    function closePhotoModal() {
+      const modal = document.getElementById('photoModal');
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        modal.style.display = 'none';
+        modal.style.opacity = '1';
+      }, 500);
+    }
+
+    // Page transition script
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

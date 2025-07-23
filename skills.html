@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skills | Amuthan C P</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #b3d4fc, #e0f7fa);
+    }
+
+    main {
+      background-color: #f7fafd;
+      margin: 20px;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      animation: slideIn 1s ease-out;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .skills-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 320px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      animation: fadeInUp 1s ease both;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) rotate(2deg);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      background: linear-gradient(135deg, #e6f3ff, #ffffff);
+    }
+
+    .card h3 {
+      color: #0077cc;
+      font-size: 22px;
+      margin-bottom: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover h3 {
+      color: #005fa3;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    .card li {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #444;
+      position: relative;
+      padding-left: 25px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .card li:hover {
+      transform: translateX(10px);
+      color: #0077cc;
+    }
+
+    .card li::before {
+      content: '\2605';
+      position: absolute;
+      left: 0;
+      color: #00bcd4;
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .card li:hover::before {
+      transform: scale(1.2);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .skills-section {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Internships</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h1>My Skills</h1>
+    <div class="skills-section">
+      <div class="card">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>Java Programming</li>
+          <li>C Programming</li>
+          <li>HTML5</li>
+          <li>CSS программирование</li>
+          <li>JavaScript</li>
+          <li>React JS</li>
+          <li>OOPs Concepts</li>
+          <li>Data Structures & Algorithms</li>
+          <li>Learning: SQL, MongoDB, Node.js</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Soft Skills</h3>
+        <ul>
+          <li>Team Work & Collaboration</li>
+          <li>Time Management</li>
+          <li>Problem Solving</li>
+          <li>Decision Making</li>
+          <li>Communication Skills</li>
+          <li>Leadership Qualities</li>
+          <li>Adaptability</li>
+          <li>Creativity & Innovation</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Page transition script
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

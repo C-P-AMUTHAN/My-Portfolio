@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amuthan C P | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    }
+
+    .hero {
+      padding: 50px 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      margin: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
+      animation: slideIn 1s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: #222;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin: 12px auto;
+      max-width: 850px;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: fill;
+      margin-bottom: 20px;
+      border: 4px solid #0077cc;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: bounceIn 1s ease-out;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .circle:nth-child(1) {
+      width: 180px;
+      height: 180px;
+      background: #ffffff;
+      top: 10%;
+      left: -50px;
+    }
+
+    .circle:nth-child(2) {
+      width: 250px;
+      height: 250px;
+      background: #d7f3ff;
+      top: 65%;
+      left: 85%;
+    }
+
+    .circle:nth-child(3) {
+      width: 140px;
+      height: 140px;
+      background: #c2e9fb;
+      top: 85%;
+      left: 10%;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="fade-in">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Internships</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- Floating Circles -->
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <img src="assets/Amuthan_Coat_Photo.jpg" alt="Profile Photo" class="profile-photo">
+    <h1>AMUTHAN C P</h1>
+    <p>B.E CSE Final Year Student at K. Ramakrishnan College of Engineering</p>
+    <p>
+      Dedicated Computer Science student specializing in backend development and system optimization,
+      with strong command of C, Java, and OOP principles. Passionate about clean architecture and efficient algorithms.
+      Active in competitive programming on SkillRack, HackerRank, and LeetCode. Currently diving deep into full-stack
+      development using MERN stack while delivering scalable, performance-driven solutions.
+    </p>
+    <a href="assets/AMUTHAN C P RESUME.pdf" download class="btn">Download Resume</a>
+  </header>
+  <footer>
+  <p>© AMUTHAN C P All Rights Reserved</p>
+</footer>
+
+  <script>
+    // Page transition script
+    document.querySelectorAll('.navbar a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

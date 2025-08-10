@@ -4,13 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Education | Amuthan C P</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <style>
+    body { background:#000 !important; min-height:100vh; position:relative; overflow-x:hidden; }
+    #starfield-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    .navbar { background: transparent !important; box-shadow: none !important; }
+    .navbar a { color: #ffffff !important; }
+    .navbar a:hover { color: #60a5fa !important; }
+    .circle { display: none; }
+
     h2 {
       text-align: center;
       margin-top: 40px;
       font-size: 2rem;
-      color: #2c3e50;
+      color: #ffffff;
       animation: fadeInUp 1s ease-out;
     }
 
@@ -22,35 +30,23 @@
       animation: slideIn 1s ease-out;
     }
 
+    /* Accent: Indigo (match internships) */
     .edu-card {
-      background: white;
+      background: rgba(49,46,129,0.22);
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid rgba(165,180,252,0.28);
+      box-shadow: 0 6px 22px rgba(49,46,129,0.35);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
 
-    .edu-card:hover {
-      transform: translateY(-5px) rotate(2deg);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      background: linear-gradient(135deg, #fff, #f9f9f9);
-    }
+    .edu-card:hover { transform: scale(1.03) translateY(-4px) rotate(0.5deg); box-shadow: 0 12px 36px rgba(30,58,138,0.5); background: rgba(30,58,138,0.34); }
 
-    .edu-card h3 {
-      margin-top: 0;
-      font-size: 1.3rem;
-      color: #0077cc;
-      transition: color 0.3s ease;
-    }
+    .edu-card h3 { margin-top: 0; font-size: 1.3rem; color: #93c5fd; transition: color 0.3s ease; }
 
-    .edu-card:hover h3 {
-      color: #005fa3;
-    }
+    .edu-card:hover h3 { color: #bfdbfe; }
 
-    .edu-card p {
-      margin: 8px 0;
-      transition: color 0.3s ease;
-    }
+    .edu-card p { margin: 8px 0; transition: color 0.3s ease; color: #e5e7eb; }
 
     .edu-card:hover p {
       color: #555;
@@ -80,6 +76,7 @@
   </style>
 </head>
 <body class="fade-in">
+  <canvas id="starfield-canvas" class="absolute inset-0 z-0"></canvas>
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="skills.html">Skills</a>
@@ -115,6 +112,38 @@
       <p><strong>Percentage:</strong> 68%</p>
     </div>
   </div>
+
+  <script>
+    // Starfield background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('starfield-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const starGeometry = new THREE.SphereGeometry(0.1, 24, 24);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const stars = [];
+    for (let i = 0; i < 2000; i++) {
+      const star = new THREE.Mesh(starGeometry, starMaterial);
+      star.position.set((Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+      stars.push(star);
+      scene.add(star);
+    }
+    camera.position.z = 5;
+    function animate() {
+      requestAnimationFrame(animate);
+      stars.forEach(star => {
+        star.position.z += 0.1;
+        if (star.position.z > camera.position.z) star.position.z = -100;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 
   <script>
     // Page transition script

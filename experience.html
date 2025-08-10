@@ -4,8 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Internships | Amuthan C P</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <style>
+    body { background:#000 !important; min-height:100vh; position:relative; overflow-x:hidden; }
+    #starfield-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    .navbar { background: transparent !important; box-shadow: none !important; }
+    .navbar a { color: #ffffff !important; }
+    .navbar a:hover { color: #60a5fa !important; }
+    .circle { display: none; }
+
     header {
       text-align: center;
       padding: 40px 20px 20px;
@@ -14,7 +22,7 @@
 
     header h1 {
       font-size: 36px;
-      color: #2c3e50;
+      color: #ffffff;
     }
 
     .experience-section {
@@ -24,45 +32,42 @@
       animation: slideIn 1s ease-out;
     }
 
+    /* Accent: Blue (match projects) */
     .internship {
-      background-color: white;
+      background-color: rgba(30,58,138,0.22);
       border-radius: 12px;
       padding: 20px 30px;
       margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(96,165,250,0.28);
+      box-shadow: 0 8px 24px rgba(30,58,138,0.35);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
 
     .internship:hover {
-      transform: translateY(-5px) rotate(1deg);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-      background: linear-gradient(135deg, #fff, #f9f9f9);
+      transform: scale(1.03) translateY(-4px);
+      box-shadow: 0 12px 36px rgba(30,58,138,0.5);
+      background: rgba(30,58,138,0.34);
     }
 
     .internship h3 {
-      color: #0077cc;
+      color: #93c5fd;
       margin-bottom: 8px;
       transition: color 0.3s ease;
     }
 
-    .internship:hover h3 {
-      color: #005fa3;
-    }
+    .internship:hover h3 { color: #bfdbfe; }
 
-    .internship p {
-      font-size: 16px;
-      line-height: 1.6;
-    }
+    .internship p { font-size: 16px; line-height: 1.6; color: #e5e7eb; }
 
     .internship a {
-      color: #0077b5;
+      color: #93c5fd;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease, transform 0.3s ease;
     }
 
     .internship a:hover {
-      color: #005f8b;
+      color: #60a5fa;
       transform: translateX(5px);
       text-decoration: underline;
     }
@@ -84,7 +89,7 @@
     }
 
     .photo-modal-content {
-      background: white;
+      background: rgba(2,6,23,0.96);
       max-width: 800px;
       width: 90%;
       max-height: 80vh;
@@ -95,6 +100,8 @@
       animation: zoomIn 0.5s ease-out;
       text-align: center;
     }
+    .photo-modal-content h3 { color: #93c5fd; }
+    .photo-modal-content p { color: #e5e7eb; }
 
     .photo-modal-content img {
       max-width: 100%;
@@ -126,8 +133,9 @@
       }
     }
   </style>
-</head>
-<body class="fade-in">
+ </head>
+ <body class="fade-in">
+   <canvas id="starfield-canvas" class="absolute inset-0 z-0"></canvas>
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="skills.html">Skills</a>
@@ -174,6 +182,38 @@
       <!-- JS Populated Images -->
     </div>
   </div>
+
+  <script>
+    // Starfield background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('starfield-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const starGeometry = new THREE.SphereGeometry(0.1, 24, 24);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const stars = [];
+    for (let i = 0; i < 2000; i++) {
+      const star = new THREE.Mesh(starGeometry, starMaterial);
+      star.position.set((Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+      stars.push(star);
+      scene.add(star);
+    }
+    camera.position.z = 5;
+    function animate() {
+      requestAnimationFrame(animate);
+      stars.forEach(star => {
+        star.position.z += 0.1;
+        if (star.position.z > camera.position.z) star.position.z = -100;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 
   <script>
     const internshipPhotos = [

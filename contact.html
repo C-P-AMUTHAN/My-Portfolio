@@ -4,13 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Amuthan C P</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <style>
+    body {
+      background: #000 !important;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden; /* allow vertical scroll */
+    }
+    #starfield-canvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    .navbar { background: transparent !important; box-shadow: none !important; }
+    .navbar a { color: #ffffff !important; }
+    .navbar a:hover { color: #60a5fa !important; }
+    .circle { display: none; }
+
     h2 {
       text-align: center;
       margin: 40px 0 30px;
       font-size: 2.5rem;
-      color: #2c3e50;
+      color: #ffffff;
       animation: fadeInUp 1s ease-out;
     }
 
@@ -21,55 +34,32 @@
       animation: slideIn 1s ease-out;
     }
 
+    /* Accent: Blue (match projects) */
     .contact-box {
-      background: white;
+      background: rgba(30,58,138,0.22);
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid rgba(96,165,250,0.28);
+      box-shadow: 0 6px 22px rgba(30,58,138,0.35);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
       margin-bottom: 40px;
     }
 
-    .contact-box:hover {
-      transform: translateY(-5px) rotate(1deg);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      background: linear-gradient(135deg, #fff, #f9f9f9);
-    }
+    .contact-box:hover { transform: scale(1.03) translateY(-4px) rotate(0.5deg); box-shadow: 0 12px 36px rgba(30,58,138,0.5); background: rgba(30,58,138,0.34); }
 
-    .contact-box p {
-      margin: 10px 0;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
+    .contact-box p { margin: 10px 0; color: #e5e7eb; transition: transform 0.3s ease, color 0.3s ease; }
 
     .contact-box p:hover {
       transform: translateX(10px);
       color: #0077cc;
     }
 
-    .label {
-      font-weight: bold;
-      color: #2c3e50;
-    }
+    .label { font-weight: bold; color: #93c5fd; }
 
-    a {
-      color: #0077b5;
-      text-decoration: none;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+    a { color: #93c5fd; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; }
+    a:hover { color: #60a5fa; transform: translateX(5px); text-decoration: underline; }
 
-    a:hover {
-      color: #005f8b;
-      transform: translateX(5px);
-      text-decoration: underline;
-    }
-
-    .contact-form {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    }
+    .contact-form { background: rgba(30,58,138,0.22); padding: 30px; border-radius: 12px; border: 1px solid rgba(96,165,250,0.28); box-shadow: 0 6px 22px rgba(30,58,138,0.35); transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; }
 
     .contact-form:hover {
       transform: translateY(-5px) rotate(1deg);
@@ -78,7 +68,7 @@
     }
 
     .contact-form h3 {
-      color: #0077cc;
+      color: #93c5fd;
       margin-bottom: 20px;
       text-align: center;
     }
@@ -165,6 +155,7 @@
   </style>
 </head>
 <body class="fade-in">
+  <canvas id="starfield-canvas" class="absolute inset-0 z-0"></canvas>
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="skills.html">Skills</a>
@@ -183,11 +174,9 @@
 
   <div class="contact-container">
     <div class="contact-box">
-      <p><span class="label">Mobile:</span> +91 63745 31264</p>
       <p><span class="label">Email:</span> <a href="mailto:amuthanpuviarasu7@gmail.com">amuthanpuviarasu7@gmail.com</a></p>
       <p><span class="label">LinkedIn:</span> <a href="https://www.linkedin.com/in/amuthan-c-p-3870ab252/" target="_blank">amuthan-c-p-3870ab252</a></p>
       <p><span class="label">GitHub:</span> <a href="https://github.com/C-P-AMUTHAN" target="_blank">C-P-AMUTHAN</a></p>
-      <p><span class="label">Location:</span> Tiruchirappalli, Tamil Nadu, India</p>
     </div>
 
     <!-- <div class="contact-form">
@@ -207,6 +196,38 @@
       <button type="submit" class="submit-btn">Send Message</button>
     </div> -->
   </div>
+
+  <script>
+    // Starfield background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('starfield-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const starGeometry = new THREE.SphereGeometry(0.1, 24, 24);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const stars = [];
+    for (let i = 0; i < 2000; i++) {
+      const star = new THREE.Mesh(starGeometry, starMaterial);
+      star.position.set((Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+      stars.push(star);
+      scene.add(star);
+    }
+    camera.position.z = 5;
+    function animate() {
+      requestAnimationFrame(animate);
+      stars.forEach(star => {
+        star.position.z += 0.1;
+        if (star.position.z > camera.position.z) star.position.z = -100;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 
   <script>
     // Page transition script

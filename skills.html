@@ -4,25 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skills | Amuthan C P</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    body {
-      background: linear-gradient(to bottom right, #b3d4fc, #e0f7fa);
-    }
+    body { background:#000 !important; min-height:100vh; position:relative; overflow-x:hidden; }
+    #starfield-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    .navbar { background: transparent !important; box-shadow: none !important; }
+    .navbar a { color: #ffffff !important; }
+    .navbar a:hover { color: #60a5fa !important; }
 
     main {
-      background-color: #f7fafd;
+      background: transparent;
       margin: 20px;
-      border-radius: 20px;
+      border-radius: 0;
       padding: 40px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: none;
       text-align: center;
       animation: slideIn 1s ease-out;
     }
 
     h1 {
       font-size: 36px;
-      color: #2c3e50;
+      color: #ffffff;
       margin-bottom: 30px;
       animation: fadeInUp 1s ease-out 0.2s both;
     }
@@ -35,32 +38,32 @@
       margin-top: 20px;
     }
 
+    /* Accent: Sky */
     .card {
-      background: white;
+      background: rgba(7,89,133,0.22);
       border-radius: 20px;
       padding: 30px;
       width: 320px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(125,211,252,0.28);
+      box-shadow: 0 6px 20px rgba(7,89,133,0.35);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
       animation: fadeInUp 1s ease both;
     }
 
     .card:hover {
       transform: translateY(-8px) rotate(2deg);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-      background: linear-gradient(135deg, #e6f3ff, #ffffff);
+      box-shadow: 0 14px 34px rgba(7,89,133,0.5);
+      background: rgba(7,89,133,0.34);
     }
 
     .card h3 {
-      color: #0077cc;
+      color: #7dd3fc;
       font-size: 22px;
       margin-bottom: 20px;
       transition: color 0.3s ease;
     }
 
-    .card:hover h3 {
-      color: #005fa3;
-    }
+    .card:hover h3 { color: #bae6fd; }
 
     .card ul {
       list-style: none;
@@ -71,16 +74,13 @@
     .card li {
       font-size: 16px;
       margin-bottom: 12px;
-      color: #444;
+      color: #e5e7eb;
       position: relative;
       padding-left: 25px;
       transition: transform 0.3s ease, color 0.3s ease;
     }
 
-    .card li:hover {
-      transform: translateX(10px);
-      color: #0077cc;
-    }
+    .card li:hover { transform: translateX(10px); color: #93c5fd; }
 
     .card li::before {
       content: '\2605';
@@ -126,6 +126,7 @@
   </style>
 </head>
 <body class="fade-in">
+  <canvas id="starfield-canvas" class="absolute inset-0 z-0"></canvas>
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="skills.html">Skills</a>
@@ -168,6 +169,38 @@
       </div>
     </div>
   </main>
+
+  <script>
+    // Starfield background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('starfield-canvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const starGeometry = new THREE.SphereGeometry(0.1, 24, 24);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const stars = [];
+    for (let i = 0; i < 2000; i++) {
+      const star = new THREE.Mesh(starGeometry, starMaterial);
+      star.position.set((Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200);
+      stars.push(star);
+      scene.add(star);
+    }
+    camera.position.z = 5;
+    function animate() {
+      requestAnimationFrame(animate);
+      stars.forEach(star => {
+        star.position.z += 0.1;
+        if (star.position.z > camera.position.z) star.position.z = -100;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 
   <script>
     // Page transition script

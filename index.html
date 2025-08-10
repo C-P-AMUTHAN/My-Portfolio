@@ -4,19 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Amuthan C P | Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
   <style>
     body {
-      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
-    }
+    background: #000; /* Use a dark background */
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; /* Allow vertical scroll, hide horizontal */
+}
+#starfield-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.min-h-screen, .bg-gradient-to-r {
+    position: relative;
+    z-index: 1; /* Make sure content is on top */
+}
 
     .hero {
       padding: 50px 20px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.9);
+      background: transparent;
       margin: 30px 20px;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border-radius: 0;
+      box-shadow: none;
       position: relative;
       z-index: 2;
       animation: slideIn 1s ease-out;
@@ -24,7 +40,7 @@
 
     .hero h1 {
       font-size: 3rem;
-      color: #222;
+      color: #ffffff;
       animation: fadeInUp 1s ease-out 0.2s both;
     }
 
@@ -32,7 +48,26 @@
       font-size: 1.1rem;
       margin: 12px auto;
       max-width: 850px;
+      color: #e5e7eb;
       animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    /* Make navbar transparent on the home page */
+    .navbar {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    .navbar a { color: #ffffff !important; }
+    .navbar a:hover { color: #60a5fa !important; }
+
+    /* Hide decorative circles to show full live background */
+    .circle { display: none; }
+
+    /* Transparent footer on the home page */
+    footer {
+      background: transparent !important;
+      border-top: none !important;
+      color: #e5e7eb !important;
     }
 
     .profile-photo {
@@ -126,6 +161,7 @@
   </style>
 </head>
 <body class="fade-in">
+  <canvas id="starfield-canvas" class="absolute inset-0 z-0"></canvas>
   <!-- Navigation -->
   <nav class="navbar">
     <a href="index.html">Home</a>
@@ -160,6 +196,55 @@
 </footer>
 
   <script>
+        // Set up the scene, camera, and renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById('starfield-canvas'),
+        alpha: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Create the stars
+    const starGeometry = new THREE.SphereGeometry(0.1, 24, 24);
+    const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const stars = [];
+
+    for (let i = 0; i < 2000; i++) {
+        const star = new THREE.Mesh(starGeometry, starMaterial);
+        star.position.set(
+            (Math.random() - 0.5) * 200,
+            (Math.random() - 0.5) * 200,
+            (Math.random() - 0.5) * 200
+        );
+        stars.push(star);
+        scene.add(star);
+    }
+
+    camera.position.z = 5;
+
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Move the stars
+        stars.forEach(star => {
+            star.position.z += 0.1;
+            if (star.position.z > camera.position.z) {
+                star.position.z = -100;
+            }
+        });
+
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // Handle window resizing
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
     // Page transition script
     document.querySelectorAll('.navbar a').forEach(link => {
       link.addEventListener('click', (e) => {

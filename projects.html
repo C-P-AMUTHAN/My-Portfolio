@@ -158,13 +158,15 @@
       overflow-x: hidden; /* allow vertical scroll */
     }
     #starfield-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
     .navbar { background: transparent !important; box-shadow: none !important; }
     .navbar a { color: #ffffff !important; }
     .navbar a:hover { color: #60a5fa !important; }
@@ -234,7 +236,16 @@
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('starfield-canvas'), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    function resizeStarfield() {
+      const height = Math.max(document.body.scrollHeight, window.innerHeight);
+      renderer.setSize(window.innerWidth, height);
+      camera.aspect = window.innerWidth / height;
+      camera.updateProjectionMatrix();
+    }
+    resizeStarfield();
+    window.addEventListener('resize', resizeStarfield);
+    window.addEventListener('scroll', resizeStarfield);
+
     const starGeometry = new THREE.SphereGeometry(0.1, 24, 24);
     const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
     const stars = [];
